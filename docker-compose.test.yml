@@ -1,0 +1,13 @@
+version: '3.2'
+services:
+  sut:
+    build:
+      context: ..
+      dockerfile: "github_actions_test/Dockerfile"
+    depends_on:
+      - db
+    env_file:
+      - test-config.EXAMPLE
+    volumes:
+      - ./target:/app/test/target
+    command: mvn verify

@@ -1,0 +1,12 @@
+version: '3.2'
+services:
+  db:
+    image: postgres:10.5-alpine
+    env_file:
+      - fake-services-envs
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  postgres-db:

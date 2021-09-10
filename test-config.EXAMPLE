@@ -1,0 +1,5 @@
+# uds
+INFORMDB_JDBC_URL=jdbc:postgresql://db:5432/test
+INFORMDB_SCHEMA=public
+INFORMDB_USERNAME=test
+INFORMDB_PASSWORD=test
