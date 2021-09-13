@@ -39,9 +39,6 @@ jobs:
           path: /tmp/.buildx-cache
           # use the same key for same operating system, could try and do for most recent tag of repo?
           key: ${{ runner.os }}
-      - name: Build docker
-        # building services, importing cache and exporting cache
-        # there is a github action cache but experimental so not using for now
       - name: Build docker image
         uses: docker/build-push-action@v2
         with:
