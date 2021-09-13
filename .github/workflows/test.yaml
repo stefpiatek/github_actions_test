@@ -46,6 +46,7 @@ jobs:
           context: .
           push: false
           load: true
+          tags: stefpiatek/github_actions_test:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
       - name: run tests
