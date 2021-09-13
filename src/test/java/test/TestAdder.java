@@ -20,11 +20,6 @@ class TestAdder {
         assertEquals(2, adder.add(1, 1));
     }
 
-    @Test
-    void failure() {
-        assertEquals(2, adder.add(1, -1));
-    }
-
 }
 
 
