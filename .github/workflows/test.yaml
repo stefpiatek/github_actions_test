@@ -29,13 +29,16 @@ jobs:
     - name: Cache Docker layers
       uses: actions/cache@v2
       with:
-        path: /tmp/.buildx-cache
+        path: |
+          /tmp/.buildx-cache
+          /var/lib/docker/buildkit
         # use the same key for same operating system, could try and do for most recent tag of repo?
         key: ${{ runner.os }}
     - name: Build docker
       working-directory: github_actions_test
+      # building services and enabling inline cache to allow that image to be able to be used a source for other builds
       run: |
-        docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
+        docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build --build-arg BUILDKIT_INLINE_CACHE=1
     - name: run tests
       working-directory: github_actions_test
       run: |
