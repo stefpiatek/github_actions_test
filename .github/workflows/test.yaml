@@ -42,8 +42,8 @@ jobs:
           context: .
           push: false
           load: true
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          cache-from: type=gha
+          cache-to: type=gha
       - name: run tests
         working-directory: github_actions_test
         run: |
