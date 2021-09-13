@@ -25,11 +25,11 @@ jobs:
     - name: checkout informdb
       id: checkout-branch
       uses: actions/checkout@v2
+      continue-on-error: true
       with:
         repository: "inform-health-informatics/Inform-DB"
         path: Inform-DB
         ref: ${{ steps.vars.outputs.branch }}
-        continue-on-error: true
     - name: checkout informdb master
       id: checkout-master
       if: ${{ steps.checkout-branch.outcome == 'failure' }}
