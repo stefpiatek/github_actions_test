@@ -9,5 +9,5 @@ services:
     env_file:
       - test-config.EXAMPLE
     volumes:
-      - ./target:/app/test/target
+      - ./target:/app/github_actions_test/target
     command: mvn verify
