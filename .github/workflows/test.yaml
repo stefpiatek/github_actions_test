@@ -12,7 +12,6 @@ jobs:
     steps:
     - name: checkout Repo
       uses: actions/checkout@v2
-      with:
     - name: checkout informdb
       uses: actions/checkout@v2
       with:
@@ -22,6 +21,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
+    - name: Cache Docker layers
+      uses: actions/cache@v2
+      with:
+        path: /tmp/.buildx-cache
+        # use the same key for same operating system, could try and do for most recent tag of repo?
+        key: ${{ runner.os }}
 # use buildkit
 #  DOCKER_BUILDKIT=1
