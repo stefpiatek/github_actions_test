@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: github_actions_test
-    # try and checkout the same branch as the PR, otherwise revert to default branch
+    # try and checkout the same branch as the PR, otherwise revert to develop
     - name: Set output variables
       # gets current branch name
       id: vars
