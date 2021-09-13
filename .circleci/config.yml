@@ -12,16 +12,17 @@ jobs:
           path: ~/project/github_actions_test
       - run:
           name: clone informdb
+          working_directory: ~/project
           command: git clone "git@github.com:inform-health-informatics/Inform-DB.git"
       - run:
           name: docker-compose build
-          working_directory: ~/github_actions_test
+          working_directory: ~/project/github_actions_test
           command: |
             docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}
             docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
       - run:
           name: run docker-compose tests
-          working_directory: ~/project/testing
+          working_directory: ~/project/github_actions_test
           command: docker-compose -f docker-compose.fake-services.yml  -f docker-compose.test.yml up --exit-code-from sut
       - store_test_results:
           path: ~/project/github_actions_test/target/surefire-reports
