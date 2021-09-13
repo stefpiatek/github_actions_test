@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
     steps:
     - name: checkout Repo
       uses: actions/checkout@v2
@@ -38,5 +40,3 @@ jobs:
       working-directory: github_actions_test
       run: |
         docker-compose -f docker-compose.fake-services.yml  -f docker-compose.test.yml up --exit-code-from sut
-# use buildkit
-#  DOCKER_BUILDKIT=1
