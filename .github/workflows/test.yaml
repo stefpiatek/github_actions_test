@@ -10,6 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      # enable docker buildkit for faster building
       DOCKER_BUILDKIT: 1
       COMPOSE_DOCKER_CLI_BUILD: 1
     steps:
@@ -27,7 +28,7 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-    - name: Cache Docker layers
+    - name: Enable caching of docker build layers
       uses: actions/cache@v2
       with:
         path: /tmp/build-cache
@@ -36,6 +37,7 @@ jobs:
     - name: Build docker
       working-directory: github_actions_test
       # building services, importing cache and exporting cache
+      # there is a github action cache but experimental so not using for now
       run: |
         docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
           --import-cache type=local,src=/tmp/build-cache --export-cache type=local,dest=/tmp/build-cache-new
