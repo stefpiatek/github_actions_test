@@ -25,7 +25,6 @@ jobs:
       run: echo ::set-output name=branch::${GITHUB_REF#refs/*/} # ${{ steps.vars.outputs.branch }}
     - name: checkout informdb
       id: checkout-branch
-      uses: actions/checkout@v2
       run: |
         git clone --branch ${{ steps.vars.outputs.branch }} git@github.com:inform-health-informatics/Inform-DB.git \
         || git clone --branch develop git@github.com:inform-health-informatics/Inform-DB.git
