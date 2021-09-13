@@ -29,12 +29,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Enable caching of docker build layers
-        uses: actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          # use the same key for same operating system, could try and do for most recent tag of repo?
-          key: ${{ runner.os }}
+      - name: Pull images
+        # Pull the latest image to build, and avoid caching pull-only images.
+        run: docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml pull
+      - name: Cache docker layers
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        # Ignore the failure of a step and avoid terminating the job.
+        continue-on-error: true
       - name: Build docker images
         working-directory: github_actions_test
         run: |
