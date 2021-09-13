@@ -31,7 +31,6 @@ jobs:
       with:
         path: |
           /tmp/.buildx-cache
-          /var/lib/docker/buildkit
         # use the same key for same operating system, could try and do for most recent tag of repo?
         key: ${{ runner.os }}
     - name: Build docker
@@ -48,3 +47,8 @@ jobs:
       if: always() # always run even if the previous step fails
       with:
         report_paths: '**/target/surefire-reports/TEST-*.xml'
+    - name: Move cache
+      # remove previous cache and the transfer new cache to current
+      run: |
+        rm -rf /tmp/.buildx-cache
+        mv /tmp/.buildx-cache-new /tmp/.buildx-cache
