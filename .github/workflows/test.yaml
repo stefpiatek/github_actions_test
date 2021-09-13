@@ -26,19 +26,9 @@ jobs:
     - name: checkout informdb
       id: checkout-branch
       uses: actions/checkout@v2
-      continue-on-error: true
-      with:
-        repository: "inform-health-informatics/Inform-DB"
-        path: Inform-DB
-        ref: ${{ steps.vars.outputs.branch }}
-    - name: checkout informdb master
-      id: checkout-master
-      if: ${{ steps.checkout-branch.outcome == 'failure' }}
-      uses: actions/checkout@v2
-      with:
-        repository: "inform-health-informatics/Inform-DB"
-        path: Inform-DB
-        ref: develop
+      run: |
+        git clone --branch ${{ steps.vars.outputs.branch }} git@github.com:inform-health-informatics/Inform-DB.git \
+        || git clone --branch develop git@github.com:inform-health-informatics/Inform-DB.git
     - name: Login to Docker Hub
       uses: docker/login-action@v1
       with:
