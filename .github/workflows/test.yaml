@@ -47,8 +47,3 @@ jobs:
         if: always() # always run even if the previous step fails
         with:
           report_paths: '**/target/surefire-reports/TEST-*.xml'
-      - name: Move cache
-        # remove previous cache and the transfer new cache to current
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
