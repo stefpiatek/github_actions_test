@@ -33,7 +33,10 @@ jobs:
     - name: Build docker
       working-directory: github_actions_test
       run: |
-        echo ---Building and starting up docker---
         docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
+    - name: run tests
+      working-directory: github_actions_test
+      run: |
+        docker-compose -f docker-compose.fake-services.yml  -f docker-compose.test.yml up --exit-code-from sut
 # use buildkit
 #  DOCKER_BUILDKIT=1
