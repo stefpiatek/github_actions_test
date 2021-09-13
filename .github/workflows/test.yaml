@@ -36,8 +36,9 @@ jobs:
           # use the same key for same operating system, could try and do for most recent tag of repo?
           key: ${{ runner.os }}
       - name: Build docker images
-      run: |
-        docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
+        working-directory: github_actions_test
+        run: |
+          docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
       - name: run tests
         working-directory: github_actions_test
         run: |
