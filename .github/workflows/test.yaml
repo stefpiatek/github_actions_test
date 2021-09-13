@@ -43,14 +43,14 @@ jobs:
         # building services, importing cache and exporting cache
         # there is a github action cache but experimental so not using for now
       - name: Build docker image
-          uses: docker/build-push-action@v2
-          with:
-            file: ./github_actions_test/Dockerfile
-            context: .
-            push: false
-            load: true
-            cache-from: type=local,src=/tmp/.buildx-cache
-            cache-to: type=local,dest=/tmp/.buildx-cache-new
+        uses: docker/build-push-action@v2
+        with:
+          file: ./github_actions_test/Dockerfile
+          context: .
+          push: false
+          load: true
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
       - name: run tests
         working-directory: github_actions_test
         run: |
