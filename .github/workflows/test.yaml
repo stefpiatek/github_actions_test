@@ -30,6 +30,7 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
       - name: Pull images
+        working-directory: github_actions_test
         # Pull the latest image to build, and avoid caching pull-only images.
         run: docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml pull
       - name: Cache docker layers
