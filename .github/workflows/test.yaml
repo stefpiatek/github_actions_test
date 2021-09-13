@@ -45,7 +45,7 @@ jobs:
         # there is a github action cache but experimental so not using for now
         run: |
           docker-compose -f docker-compose.fake-services.yml -f docker-compose.test.yml build
-            --import-cache type=local,src=/tmp/build-cache --export-cache type=local,dest=/tmp/build-cache-new
+            --cache-from type=local,src=/tmp/build-cache --cache-to type=local,dest=/tmp/build-cache-new
       - name: run tests
         working-directory: github_actions_test
         run: |
