@@ -15,8 +15,8 @@ jobs:
       - name: checkout informdb
         id: checkout-branch
         run: |
-          echo "cloning ${GITHUB_HEAD_REF}"
-          && git clone --branch ${GITHUB_HEAD_REF} https://github.com/inform-health-informatics/Inform-DB.git
+          echo "cloning ${GITHUB_HEAD_REF}" \
+          && git clone --branch ${GITHUB_HEAD_REF} https://github.com/inform-health-informatics/Inform-DB.git \
           || git clone --branch develop https://github.com/inform-health-informatics/Inform-DB.git
       - name: Login to Docker Hub
         uses: docker/login-action@v1
