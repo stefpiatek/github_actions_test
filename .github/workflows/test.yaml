@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: github_actions_test
-  - name: Get get github slugs (branch)
-    uses: rlespinasse/github-slug-action@v3.x
+      - name: Get get github slugs (branch)
+        uses: rlespinasse/github-slug-action@v3.x
       - name: checkout informdb
         id: checkout-branch
         run: |
