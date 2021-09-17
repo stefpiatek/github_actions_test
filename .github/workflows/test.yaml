@@ -15,18 +15,18 @@ jobs:
         with:
           path: github_actions_test
       - name: Extract branch name, non-PR
-        id: extract_branch
+        id: extract_branch_push
         if: github.event_name != 'pull_request'
         shell: bash
         run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/})"
       - name: Print branch name, PR
-        id: extract_branch
+        id: extract_branch_pr
         if: github.event_name == 'pull_request'
         run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_HEAD_REF})"
       - name: checkout informdb
         id: checkout-branch
         run: |
-          git clone --branch ${BRANCH_NAME} https://github.com/inform-health-informatics/Inform-DB.git \
+          git clone --branch {{ steps.[*].outputs.BRANCH_NAME }} https://github.com/inform-health-informatics/Inform-DB.git \
           || git clone --branch develop https://github.com/inform-health-informatics/Inform-DB.git
       - name: Login to Docker Hub
         uses: docker/login-action@v1
