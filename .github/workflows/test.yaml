@@ -17,7 +17,7 @@ jobs:
       - name: Get get github slugs (branch)
         uses: rlespinasse/github-slug-action@v3.x
       - name: test env
-        run: echo "${{ env.GITHUB_REF_SLUG_URL }}"
+        run: echo "${{ env.GITHUB_REF_SLUG }}"
       - name: checkout informdb
         id: checkout-branch
         run: |
