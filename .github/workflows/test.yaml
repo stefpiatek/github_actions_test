@@ -6,6 +6,10 @@ on:
 
 jobs:
   build:
+    env:
+      # enable docker buildkit for faster building
+      DOCKER_BUILDKIT: 1
+      COMPOSE_DOCKER_CLI_BUILD: 1
     runs-on: ubuntu-latest
     steps:
       - name: checkout Repo
