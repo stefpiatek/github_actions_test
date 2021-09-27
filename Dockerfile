@@ -1,4 +1,4 @@
-FROM informmachineuser/hoci_base:latest
+FROM stefpiatek/actions_base:latest
 
 # Inform db
 COPY Inform-DB/inform-checker.xml /app/Inform-DB/
