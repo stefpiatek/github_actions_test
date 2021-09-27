@@ -30,6 +30,8 @@ jobs:
           file: Dockerfile.base
           push: true
           tags: stefpiatek/actions_base:latest
+          cache-from: type=registry,ref=stefpiatek/actions_base
+          cache-to: type=registry,ref=stefpiatek/actions_base,mode=max
       - name: Pull images
         working-directory: github_actions_test
         # Pull the latest image to build, and avoid caching pull-only images.
