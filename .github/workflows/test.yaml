@@ -23,6 +23,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build and push base image
+          id: docker_build
+          uses: docker/build-push-action@v2
+          with:
+            context: github_actions_test
+            file: Dockerfile.base
+            push: true
+            tags: informmachineuser/hoci_base:latest
       - name: Pull images
         working-directory: github_actions_test
         # Pull the latest image to build, and avoid caching pull-only images.

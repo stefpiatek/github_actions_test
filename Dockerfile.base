@@ -1,0 +1,9 @@
+FROM maven:3.6.3-jdk-11-slim
+
+# Run commands through bash so source is found
+SHELL ["/bin/bash", "-c"]
+
+RUN apt-get update \
+  && apt-get install -y r-base libpq-dev
+
+RUN R -e "install.packages(c('dbplyr', 'dplyr', 'rjson', 'DBI', 'RPostgres', 'RSQLite', 'stringr'));"

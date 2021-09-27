@@ -1,7 +1,4 @@
-FROM maven:3.6.3-jdk-11-slim
-
-# Run commands through bash so source is found
-SHELL ["/bin/bash", "-c"]
+FROM informmachineuser/hoci_base:latest
 
 # Inform db
 COPY Inform-DB/inform-checker.xml /app/Inform-DB/
