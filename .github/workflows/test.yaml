@@ -18,11 +18,22 @@ jobs:
           echo "cloning ${GITHUB_HEAD_REF}" \
           && git clone --branch ${GITHUB_HEAD_REF} https://github.com/inform-health-informatics/Inform-DB.git \
           || git clone --branch develop https://github.com/inform-health-informatics/Inform-DB.git
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - name: Build and push base image
+        id: build_base
+        uses: docker/build-push-action@v2
+        with:
+          file: Dockerfile.base
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/actions_base:latest
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/actions_base:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/actions_base:buildcache,mode=max
       - name: Pull images
         working-directory: github_actions_test
         # Pull the latest image to build, and avoid caching pull-only images.
